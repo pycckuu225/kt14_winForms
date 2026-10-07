@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace WinFormsApp2
 {
     public partial class Form1 : Form
@@ -53,6 +55,57 @@ namespace WinFormsApp2
         private void label3_Click(object? sender, EventArgs e)
         {
             Sum();
+        }
+
+        private void button1_Click(object? sender, EventArgs e)
+        {
+            Sum();
+            StringBuilder receipt = new StringBuilder();
+            receipt.AppendLine("=== ЧЕК ===");
+            if (numericUpDown1.Value > 0)
+            {
+                receipt.AppendLine($"Пицца: Мясная ({numericUpDown1.Value} шт.)");
+                if (checkBox1.Checked)
+                {
+                    receipt.AppendLine(" - Доп. мясо (+100)");
+                }
+                if (checkBox2.Checked)
+                {
+                    receipt.AppendLine(" - Доп. сыр (+50)");
+                }
+            }
+            if (numericUpDown2.Value > 0)
+            {
+                receipt.AppendLine($"Пицца: Веганская ({numericUpDown2.Value} шт.)");
+                if (checkBox3.Checked)
+                {
+                    receipt.AppendLine(" - Доп. салат (+50)");
+                }
+                if (checkBox4.Checked)
+                {
+                    receipt.AppendLine(" - Доп. помидор (+50)");
+                }
+            }
+            if (numericUpDown1.Value == 0 && numericUpDown2.Value == 0)
+            {
+                receipt.AppendLine("Пицца не заказана");
+            }
+            receipt.AppendLine("-----------------------");
+            receipt.AppendLine($"Сумма: {label7.Text} руб.");
+            receipt.AppendLine($"Скидка: {label8.Text} руб.");
+            receipt.AppendLine($"Наценка: {label9.Text} руб.");
+            receipt.AppendLine($"Итого к оплате: {label10.Text} руб.");
+            receipt.AppendLine("=======================");
+            string fileName = $"check_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.txt";
+            try
+            {
+                File.WriteAllText(fileName, receipt.ToString(), Encoding.UTF8);
+                MessageBox.Show(receipt.ToString() + "\nЧек сохранён в файл " + fileName, "Заказ оформлен", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(receipt.ToString() + "\nОшибка сохранения файла: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Form1_Load(object? sender, EventArgs e)

@@ -1,4 +1,4 @@
-﻿namespace WinFormsApp2
+namespace WinFormsApp2
 {
     partial class Form1
     {
@@ -54,6 +54,7 @@
             label8 = new Label();
             label9 = new Label();
             label10 = new Label();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             groupBox1.SuspendLayout();
@@ -362,11 +363,23 @@
             label10.TabIndex = 14;
             label10.Text = "0";
             // 
+            // button1
+            // 
+            button1.Location = new Point(36, 512);
+            button1.Margin = new Padding(2);
+            button1.Name = "button1";
+            button1.Size = new Size(368, 30);
+            button1.TabIndex = 15;
+            button1.Text = "Сформировать чек";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(439, 520);
+            ClientSize = new Size(439, 560);
+            Controls.Add(button1);
             Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(label8);
@@ -426,5 +439,6 @@
         private Label label8;
         private Label label9;
         private Label label10;
+        private Button button1;
     }
 }
